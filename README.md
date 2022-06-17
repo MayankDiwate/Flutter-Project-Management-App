@@ -8,8 +8,5 @@ This project is a starting point for a Flutter application.
 
 Design Source 👇
 
-https://www.behance.net/gallery/78944849/Project-Management-App
+![project_mgt_app](https://user-images.githubusercontent.com/67652657/174227605-2ccda674-3225-4d53-a5e5-a2da72c27f7c.png)
 
-Project Image 👇
-
-https://user-images.githubusercontent.com/67652657/174126601-f6fc0fb5-9bfd-416d-b912-05d8fbea33a5.png
