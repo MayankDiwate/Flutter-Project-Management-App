@@ -4,7 +4,9 @@ import 'package:project_management_app/widgets/details_header.dart';
 import 'package:project_management_app/widgets/details_task.dart';
 
 class DetailsPage extends StatelessWidget {
-  const DetailsPage({Key? key}) : super(key: key);
+  const DetailsPage({Key? key, required this.i}) : super(key: key);
+
+  final int i;
 
   @override
   Widget build(BuildContext context) {
@@ -17,13 +19,19 @@ class DetailsPage extends StatelessWidget {
             },
             child: const Icon(Icons.arrow_back)),
         title: const Text('Back'),
-        centerTitle: false,
+        centerTitle: false, 
       ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 8.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: const [DetailsHeader(), DetailsTask(), DetailsGraph()],
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              DetailsHeader(id: i),
+              DetailsTask(id: i),
+              const DetailsGraph(),
+            ],
+          ),
         ),
       ),
     );

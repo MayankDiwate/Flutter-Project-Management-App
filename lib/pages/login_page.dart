@@ -1,9 +1,9 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:project_management_app/auth/google_auth.dart';
+// import 'package:project_management_app/auth/google_auth.dart';
 import 'package:project_management_app/pages/sign_in.dart';
 import 'package:project_management_app/pages/sign_up.dart';
-import 'package:provider/provider.dart';
+// import 'package:provider/provider.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);

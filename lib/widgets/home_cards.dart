@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:project_management_app/pages/details_page.dart';
+import 'package:intl/intl.dart';
+
+import '../models/card_data_state.dart';
 
 class HomeCards extends StatefulWidget {
   const HomeCards({Key? key}) : super(key: key);
@@ -8,22 +11,25 @@ class HomeCards extends StatefulWidget {
   State<HomeCards> createState() => _HomeCardsState();
 }
 
+PageController _controller = PageController();
+
 class _HomeCardsState extends State<HomeCards> {
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        Navigator.of(context)
-            .push(MaterialPageRoute(builder: (_) => const DetailsPage()));
-      },
-      child: SizedBox(
-        height: MediaQuery.of(context).size.height * 0.35,
-        width: MediaQuery.of(context).size.width * 0.9,
-        child: PageView.builder(
-          scrollDirection: Axis.horizontal,
-          itemCount: 4,
-          itemBuilder: (_, i) => Padding(
-            padding: const EdgeInsets.all(10.0),
+    return SizedBox(
+      height: MediaQuery.of(context).size.height * 0.35,
+      width: MediaQuery.of(context).size.width * 0.9,
+      child: PageView.builder(
+        controller: _controller,
+        scrollDirection: Axis.horizontal,
+        itemCount: cardData.length,
+        itemBuilder: (_, id) => Padding(
+          padding: const EdgeInsets.all(10.0),
+          child: GestureDetector(
+            onTap: () {
+              Navigator.of(context)
+                  .push(MaterialPageRoute(builder: (_) => DetailsPage(i: id)));
+            },
             child: ClipRRect(
               borderRadius: BorderRadius.circular(10),
               child: Container(
@@ -32,11 +38,10 @@ class _HomeCardsState extends State<HomeCards> {
                 width: MediaQuery.of(context).size.width,
                 child: Column(
                   children: [
-                    const ListTile(
-                      leading: CircleAvatar(
-                          child: Icon(Icons.dashboard_customize_rounded)),
-                      title: Text('Jumbo Dashboard'),
-                      subtitle: Text('First Privacy Assistant Platform'),
+                    ListTile(
+                      leading: CircleAvatar(child: Icon(cardData[id].icons)),
+                      title: Text(cardData[id].title),
+                      subtitle: Text(cardData[id].subTitle),
                     ),
                     const Divider(
                       indent: 20,
@@ -65,8 +70,9 @@ class _HomeCardsState extends State<HomeCards> {
                                         ),
                                         const SizedBox(width: 5),
                                       ],
-                                      const CircleAvatar(
-                                        child: Text('+3'),
+                                      CircleAvatar(
+                                        child: Text(
+                                            "+${cardData[id].teamMembers}"),
                                         radius: 18,
                                         backgroundColor: Colors.grey,
                                       ),
@@ -82,20 +88,20 @@ class _HomeCardsState extends State<HomeCards> {
                                   const Text('YOUR TASK'),
                                   const SizedBox(height: 15),
                                   Row(
-                                    children: const [
-                                      Icon(Icons.shopping_basket_outlined,
+                                    children: [
+                                      const Icon(Icons.shopping_basket_outlined,
                                           size: 25),
-                                      SizedBox(width: 10),
+                                      const SizedBox(width: 10),
                                       Text.rich(
                                         TextSpan(
                                           children: [
                                             TextSpan(
-                                              text: '30',
-                                              style: TextStyle(
+                                              text: cardData[id].tasks,
+                                              style: const TextStyle(
                                                   fontSize: 18,
                                                   fontWeight: FontWeight.bold),
                                             ),
-                                            TextSpan(
+                                            const TextSpan(
                                               text: ' Tasks',
                                               style: TextStyle(fontSize: 18),
                                             ),
@@ -137,12 +143,13 @@ class _HomeCardsState extends State<HomeCards> {
                                 const Text('EST. DATE'),
                                 const SizedBox(height: 15),
                                 Row(
-                                  children: const [
-                                    Icon(Icons.calendar_month_sharp),
-                                    SizedBox(width: 10),
+                                  children: [
+                                    const Icon(Icons.calendar_month_sharp),
+                                    const SizedBox(width: 10),
                                     Text(
-                                      'Mar 30, 2019',
-                                      style: TextStyle(
+                                      DateFormat('yMMMd')
+                                          .format(DateTime.now()),
+                                      style: const TextStyle(
                                         fontWeight: FontWeight.bold,
                                         fontSize: 16,
                                       ),
